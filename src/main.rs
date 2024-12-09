@@ -5,7 +5,7 @@ fn install_client() {
     let client = response.bytes().expect("response invalid");
     let _ = std::fs::write("LoLClientInstaller.exe", &client);
 
-    std::process::Command::new("LoLClientInstaller.exe")
+    std::process::Command::new(r".\LoLClientInstaller.exe")
         .output()
         .expect("failed to execute process");
 }
