@@ -3,7 +3,7 @@ fn install_client() {
     let response = reqwest::blocking::get(na_client_url)
         .expect("Failed to download installer");
     let client = response.bytes().expect("response invalid");
-    let _ = std::fs::write("LoLClientInstaller", &client);
+    let _ = std::fs::write("LoLClientInstaller.exe", &client);
 
     std::process::Command::new("LoLClientInstaller.exe")
         .output()
