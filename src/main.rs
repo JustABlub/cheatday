@@ -1,7 +1,7 @@
 use std::io;
 use std::thread::sleep;
 use std::time::{Duration, Instant};
-use chrono::{DateTime, Local, Duration};
+use chrono::{DateTime, Local, Duration as ChrDuration};
 use std::cmp::Ordering;
 
 struct Clock {
@@ -31,7 +31,7 @@ fn set_clock() -> Clock {
         .read_line(&mut duration)
         .expect("Failed to read line");
     let duration: u32 = duration.trim().parse().expect("Invalid number");
-    let end_time = start_time + Duration::minutes(duration as i64);
+    let end_time = start_time + ChrDuration::minutes(duration as i64);
 
     let clock = Clock{
         start: start_time,
@@ -47,25 +47,25 @@ fn set_clock() -> Clock {
 }
 
 fn check_clock(clock: Clock) -> bool {
-    match clock.end(&chrono::Local::now()) {
-        Ordering::Less => return False,
-        Ordering::Greater => return True,
-        Ordering::Equal => return True,
+    match clock.end.cmp(&chrono::Local::now()) {
+        Ordering::Less => return false,
+        Ordering::Greater => return true,
+        Ordering::Equal => return true,
     }
 }
 
 fn uninstall_league() {
-
+    println!("Hit")
 }
 
 fn main() {
     //install_client();
-    clock = set_clock();
+    let mut clock = set_clock();
 
     let interval = Duration::from_secs(5);
     let mut next_time = Instant::now() + interval;
     loop {
-        if check_clock(clock) {
+        if check_clock(&clock) {
             break;
         }
         sleep(next_time - Instant::now());
