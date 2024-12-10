@@ -46,11 +46,11 @@ fn set_clock() -> Clock {
     return clock;
 }
 
-fn check_clock(clock: Clock) -> bool {
+fn check_clock(clock: &Clock) -> bool {
     match clock.end.cmp(&chrono::Local::now()) {
-        Ordering::Less => return false,
-        Ordering::Greater => return true,
-        Ordering::Equal => return true,
+        Ordering::Less => return true,
+        Ordering::Greater => return false,
+        Ordering::Equal => return false,
     }
 }
 
