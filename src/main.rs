@@ -56,11 +56,15 @@ fn check_clock(clock: &Clock) -> bool {
 }
 
 fn uninstall_league() {
+    /* Needs to turn off riot client for it to work
     std::process::Command::new(r"C:\Riot Games\Riot Client\RiotClientServices.exe")
         .arg("--uninstall-product=league_of_legends")
         .arg("--uninstall-patchline=live")
         .spawn()
         .expect("Failed to uninstall");
+    */
+    // nuclear option
+    let _= std::fs::remove_dir_all(r"C:\Riot Games\League of Legends");
 }
 
 fn main() {
