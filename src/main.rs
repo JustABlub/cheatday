@@ -18,7 +18,8 @@ fn install_client() {
     let _ = std::fs::write("LoLClientInstaller.exe", &client);
 
     std::process::Command::new(r".\LoLClientInstaller.exe")
-        .output()
+        .arg("--skip-to-install")
+        .spawn()
         .expect("Failed to execute process");
 }
 
@@ -62,7 +63,7 @@ fn main() {
     //install_client();
     let mut clock = set_clock();
 
-    let interval = Duration::from_secs(5);
+    let interval = Duration::from_secs(1);
     let mut next_time = Instant::now() + interval;
     loop {
         if check_clock(&clock) {
