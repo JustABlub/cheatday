@@ -56,11 +56,15 @@ fn check_clock(clock: &Clock) -> bool {
 }
 
 fn uninstall_league() {
-    println!("Hit")
+    std::process::Command::new(r"C:\Riot Games\Riot Client\RiotClientServices.exe")
+        .arg("--uninstall-product=league_of_legends")
+        .arg("--uninstall-patchline=live")
+        .spawn()
+        .expect("Failed to uninstall");
 }
 
 fn main() {
-    //install_client();
+    install_client();
     let mut clock = set_clock();
 
     let interval = Duration::from_secs(1);
